@@ -58,8 +58,8 @@ namespace Project5
             MinimumSize = new Size(1800, 1000);
             Icon = new Icon("Logo.ico");
 
-            plateformblanche.Click += PlateformeBlanche ;
-            grille.Panel1.MouseClick += click;
+            plateformblanche.MouseClick += PlateformeBlanche ;
+            MouseClick += click;
             fermer.Click += fermerclick;
 
             grille.Panel1.Controls.Add(pic);
@@ -112,8 +112,8 @@ namespace Project5
             }
         }
 
-            
-               
+
+
 
         private void fermerclick(object e, EventArgs evt)
         {
