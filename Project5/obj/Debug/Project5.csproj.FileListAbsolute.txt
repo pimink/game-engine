@@ -1,0 +1,9 @@
+C:\Users\jjbda\source\repos\Project5\Project5\bin\Debug\Project5.exe.config
+C:\Users\jjbda\source\repos\Project5\Project5\bin\Debug\Project5.exe
+C:\Users\jjbda\source\repos\Project5\Project5\bin\Debug\Project5.pdb
+C:\Users\jjbda\source\repos\Project5\Project5\obj\Debug\Project5.csprojAssemblyReference.cache
+C:\Users\jjbda\source\repos\Project5\Project5\obj\Debug\Project5.csproj.CoreCompileInputs.cache
+C:\Users\jjbda\source\repos\Project5\Project5\obj\Debug\Project5.exe
+C:\Users\jjbda\source\repos\Project5\Project5\obj\Debug\Project5.pdb
+C:\Users\jjbda\source\repos\Project5\Project5\obj\Debug\Project5.Fenetre.resources
+C:\Users\jjbda\source\repos\Project5\Project5\obj\Debug\Project5.csproj.GenerateResource.cache
