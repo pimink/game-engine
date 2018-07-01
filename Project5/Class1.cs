@@ -26,7 +26,7 @@ namespace Project5
         private Button plateformblanche = new Button();
         private choix choix =  choix.nul;
         private TrackBar bar = new TrackBar();
-        private int tailleplatform = 0;
+        private int tailleplatform = 1;
         private PictureBox pic = new PictureBox();
         private Label tailplatfrm = new Label();
 
@@ -49,7 +49,9 @@ namespace Project5
             plateformblanche.Text = "PLATEFORME BLANCHE";
             plateformblanche.ForeColor = Color.White;
 
-            tailplatfrm.Location = new Point(200, 300);
+            tailplatfrm.Location = new Point(160, 305);
+            tailplatfrm.Text = "1 pixels";
+            tailplatfrm.ForeColor = Color.White;
 
             pic.BackColor = Color.FromArgb(53, 53, 53);
             pic.Paint += new PaintEventHandler(chargerImage);
@@ -79,6 +81,7 @@ namespace Project5
 
         }
 
+        //Affiche la caméra sur l'image
         private void chargerImage(object sender, PaintEventArgs e)
         {
             for (int i = 0; i < 150; i++)
@@ -95,16 +98,20 @@ namespace Project5
 
         static void Main()
         {
+            //Lance l'application
             Application.Run(new Fenetre());
         }
 
+        //Déclenché lorsqu'on appuie sur le bouton "PLATEFORME BLANCHE" et ajoute tout les outils a la fenetre
         private void PlateformeBlanche(object sender, EventArgs evt)
         {
             grille.Panel2.Controls.Add(fermer);
+            grille.Panel2.Controls.Add(tailplatfrm);
             grille.Panel2.Controls.Add(bar);
             choix = choix.platformblanche;
         }
 
+        //Déclenché lorsqu'on clique n'importe où sur l'ecran
         private void click(object e, EventArgs evt)
         {
             switch (choix)
@@ -112,10 +119,35 @@ namespace Project5
                 case choix.platformblanche:
                     if (MousePosition.X -Location.X> 50 && MousePosition.X - Location.X < 800 && MousePosition.Y - Location.Y > 30 && MousePosition.Y - Location.Y < 800)
                     {
-                        for (int i = 0; i <= tailleplatform; i++)
+                        for (int o = 0; o <= tailleplatform - 1; o++)
+                        for (int i = 0; i <= tailleplatform - 1; i++)
                         {
+                            map[(MousePosition.Y - Location.Y - 80) / 5 + i + posy, (MousePosition.X - Location.X - 60) / 5 + o + posx] = Color.White;
+                            cam[(MousePosition.Y - Location.Y - 80) / 5 + i , (MousePosition.X - Location.X - 60) / 5+ o ] = Color.White;
+
+                            map[(MousePosition.Y - Location.Y - 80) / 5 - i + posy, (MousePosition.X - Location.X - 60) / 5 + o + posx] = Color.White;
+                            cam[(MousePosition.Y - Location.Y - 80) / 5 - i, (MousePosition.X - Location.X - 60) / 5 + o] = Color.White;
+
+                            map[(MousePosition.Y - Location.Y - 80) / 5 + posy, (MousePosition.X - Location.X - 60) / 5 + o + posx] = Color.White;
+                            cam[(MousePosition.Y - Location.Y - 80) / 5, (MousePosition.X - Location.X - 60) / 5 + o] = Color.White;
+
+                            map[(MousePosition.Y - Location.Y - 80) / 5 + i + posy, (MousePosition.X - Location.X - 60) / 5 - o + posx] = Color.White;
+                            cam[(MousePosition.Y - Location.Y - 80) / 5 + i, (MousePosition.X - Location.X - 60) / 5 - o] = Color.White;
+
+                            map[(MousePosition.Y - Location.Y - 80) / 5 + i + posy, (MousePosition.X - Location.X - 60) / 5 + posx] = Color.White;
+                            cam[(MousePosition.Y - Location.Y - 80) / 5 + i, (MousePosition.X - Location.X - 60) / 5] = Color.White;
+
+                            map[(MousePosition.Y - Location.Y - 80) / 5 + posy, (MousePosition.X - Location.X - 60) / 5 - o + posx] = Color.White;
+                            cam[(MousePosition.Y - Location.Y - 80) / 5 , (MousePosition.X - Location.X - 60) / 5 - o] = Color.White;
+
                             map[(MousePosition.Y - Location.Y - 80) / 5 + posy, (MousePosition.X - Location.X - 60) / 5 + posx] = Color.White;
                             cam[(MousePosition.Y - Location.Y - 80) / 5, (MousePosition.X - Location.X - 60) / 5] = Color.White;
+
+                            map[(MousePosition.Y - Location.Y - 80) / 5 - i + posy, (MousePosition.X - Location.X - 60) / 5 - o + posx] = Color.White;
+                            cam[(MousePosition.Y - Location.Y - 80) / 5 - i, (MousePosition.X - Location.X - 60) / 5 - o] = Color.White;
+
+                            map[(MousePosition.Y - Location.Y - 80) / 5 - i + posy, (MousePosition.X - Location.X - 60) / 5 + posx] = Color.White;
+                            cam[(MousePosition.Y - Location.Y - 80) / 5 - i, (MousePosition.X - Location.X - 60) / 5] = Color.White;
                         }
                         pic.Refresh();
                     }
@@ -125,8 +157,8 @@ namespace Project5
 
         private void barre(object e, EventArgs evt)
         {
-            tailleplatform = bar.Value;
-            tailplatfrm.Text = tailleplatform.ToString();
+            tailleplatform = bar.Value + 1;
+            tailplatfrm.Text = tailleplatform.ToString() + " pixels";
         }
 
 
