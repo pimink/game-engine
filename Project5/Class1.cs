@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,13 +24,21 @@ namespace Project5
         private int posy = 350;
         private SplitContainer grille = new SplitContainer();
         private Button plateformblanche = new Button();
-        private bool bol, boool;
-        choix choix =  choix.nul;
+        private choix choix =  choix.nul;
+        private TrackBar bar = new TrackBar();
+        private int tailleplatform = 0;
+        private PictureBox pic = new PictureBox();
+        private Label tailplatfrm = new Label();
 
         public Fenetre()
         {
 
-            fermer.Location = new Point(70, 30);
+            fermer.Location = new Point(190, 10);
+            fermer.Text = "fermer";
+            fermer.ForeColor = Color.Red;
+
+            bar.Location = new Point(50, 300);
+
             BackColor = Color.FromArgb(53, 53, 53);
             grille.Dock = DockStyle.Fill;
             grille.Panel1MinSize = 1410;
@@ -41,7 +49,7 @@ namespace Project5
             plateformblanche.Text = "PLATEFORME BLANCHE";
             plateformblanche.ForeColor = Color.White;
 
-            PictureBox pic = new PictureBox();
+            tailplatfrm.Location = new Point(200, 300);
 
             pic.BackColor = Color.FromArgb(53, 53, 53);
             pic.Paint += new PaintEventHandler(chargerImage);
@@ -58,8 +66,9 @@ namespace Project5
             MinimumSize = new Size(1800, 1000);
             Icon = new Icon("Logo.ico");
 
+            bar.ValueChanged += barre;
             plateformblanche.MouseClick += PlateformeBlanche ;
-            MouseClick += click;
+            pic.MouseDown += click;
             fermer.Click += fermerclick;
 
             grille.Panel1.Controls.Add(pic);
@@ -78,7 +87,7 @@ namespace Project5
                     Rectangle pixel = new Rectangle(50 + 5 * o, 50 + 5 * i, 10, 10);
                     SolidBrush n = new SolidBrush(cam[i, o]);
                     e.Graphics.FillRectangle(n, pixel);
-                    Pen p = new Pen(Color.Black);
+                    Pen p = new Pen(cam[i, o]);
                     e.Graphics.DrawRectangle(p, pixel);
                     n.Dispose();
                 }
@@ -92,27 +101,33 @@ namespace Project5
         private void PlateformeBlanche(object sender, EventArgs evt)
         {
             grille.Panel2.Controls.Add(fermer);
+            grille.Panel2.Controls.Add(bar);
             choix = choix.platformblanche;
         }
 
         private void click(object e, EventArgs evt)
         {
-            Console.WriteLine("vat'il marcheer");
             switch (choix)
             {
                 case choix.platformblanche:
-                    Console.WriteLine("mhf1");
-                    if (MousePosition.X > Location.X + 50 && MousePosition.X < Location.X + 800 && MousePosition.Y > Location.Y + 50 && MousePosition.Y < Location.Y + 800)
+                    if (MousePosition.X -Location.X> 50 && MousePosition.X - Location.X < 800 && MousePosition.Y - Location.Y > 30 && MousePosition.Y - Location.Y < 800)
                     {
-                        map[MousePosition.X - Location.X + 50 + posx, MousePosition.Y - Location.Y + 50 + posy] = Color.White;
-                        cam[MousePosition.X - Location.X + 50, MousePosition.Y - Location.Y + 50] = Color.White;
-                        Console.WriteLine("mhf2");
+                        for (int i = 0; i <= tailleplatform; i++)
+                        {
+                            map[(MousePosition.Y - Location.Y - 80) / 5 + posy, (MousePosition.X - Location.X - 60) / 5 + posx] = Color.White;
+                            cam[(MousePosition.Y - Location.Y - 80) / 5, (MousePosition.X - Location.X - 60) / 5] = Color.White;
+                        }
+                        pic.Refresh();
                     }
                     break;
             }
         }
 
-
+        private void barre(object e, EventArgs evt)
+        {
+            tailleplatform = bar.Value;
+            tailplatfrm.Text = tailleplatform.ToString();
+        }
 
 
         private void fermerclick(object e, EventArgs evt)
