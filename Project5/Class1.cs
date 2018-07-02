@@ -12,12 +12,12 @@ namespace Project5
 {
     enum choix
     {
-        platformblanche, nul
+        platformblanche, effacer, nul
     }
 
     class Fenetre : Form
     {
-        Button fermer = new Button();
+        private Button fermer = new Button(), effacer = new Button();
         private Color[,] cam = new Color[150, 270];
         private Color[,] map = new Color[1000, 2000];
         private int posx = 10;
@@ -36,6 +36,10 @@ namespace Project5
             fermer.Location = new Point(190, 20);
             fermer.Text = "fermer";
             fermer.ForeColor = Color.Red;
+
+            effacer.Location = new Point(200, 135);
+            effacer.Text = "Effacer";
+            effacer.ForeColor = Color.White;
 
             bar.Location = new Point(50, 100);
 
@@ -72,6 +76,7 @@ namespace Project5
             plateformblanche.MouseClick += PlateformeBlanche ;
             pic.MouseDown += click;
             fermer.Click += fermerclick;
+            effacer.MouseClick += efface;
 
             grille.Panel1.Controls.Add(pic);
             grille.Panel2.Controls.Add(plateformblanche);
@@ -109,37 +114,45 @@ namespace Project5
             grille.Panel2.Controls.Add(tailplatfrm);
             grille.Panel2.Controls.Add(bar);
             grille.Panel2.Controls.Remove(plateformblanche);
+            grille.Panel2.Controls.Add(effacer);
             choix = choix.platformblanche;
         }
 
         //Déclenché lorsqu'on clique n'importe où sur l'ecran
         private void click(object e, EventArgs evt)
         {
+            Color couler = new Color();
             switch (choix)
             {
                 case choix.platformblanche:
                     if (MousePosition.X - Location.X > 50 && MousePosition.X - Location.X < 1415 && MousePosition.Y - Location.Y > 30 && MousePosition.Y - Location.Y < 840)
-                    {
+                        couler = Color.White;
+                    break;
+                case choix.effacer:
+                    if (MousePosition.X - Location.X > 50 && MousePosition.X - Location.X < 1415 && MousePosition.Y - Location.Y > 30 && MousePosition.Y - Location.Y < 840)
+                        couler = Color.Black;
+                    break;
+                default:
+                    return;
+            }
                         for (int o = 0; o <= tailleplatform - 1; o++)
                             for (int i = 0; i <= tailleplatform - 1; i++)
                             {
-                                map[(MousePosition.Y - Location.Y - 80) / 5 + i + posy, (MousePosition.X - Location.X - 60) / 5 + o + posx] = Color.White;
-                                map[(MousePosition.Y - Location.Y - 80) / 5 - i + posy, (MousePosition.X - Location.X - 60) / 5 + o + posx] = Color.White;
-                                map[(MousePosition.Y - Location.Y - 80) / 5 + posy, (MousePosition.X - Location.X - 60) / 5 + o + posx] = Color.White;
-                                map[(MousePosition.Y - Location.Y - 80) / 5 + i + posy, (MousePosition.X - Location.X - 60) / 5 - o + posx] = Color.White;
-                                map[(MousePosition.Y - Location.Y - 80) / 5 + i + posy, (MousePosition.X - Location.X - 60) / 5 + posx] = Color.White;
-                                map[(MousePosition.Y - Location.Y - 80) / 5 + posy, (MousePosition.X - Location.X - 60) / 5 - o + posx] = Color.White;
-                                map[(MousePosition.Y - Location.Y - 80) / 5 + posy, (MousePosition.X - Location.X - 60) / 5 + posx] = Color.White;
-                                map[(MousePosition.Y - Location.Y - 80) / 5 - i + posy, (MousePosition.X - Location.X - 60) / 5 - o + posx] = Color.White;
-                                map[(MousePosition.Y - Location.Y - 80) / 5 - i + posy, (MousePosition.X - Location.X - 60) / 5 + posx] = Color.White;
+                                map[(MousePosition.Y - Location.Y - 80) / 5 + i + posy, (MousePosition.X - Location.X - 60) / 5 + o + posx] = couler;
+                                map[(MousePosition.Y - Location.Y - 80) / 5 - i + posy, (MousePosition.X - Location.X - 60) / 5 + o + posx] = couler;
+                                map[(MousePosition.Y - Location.Y - 80) / 5 + posy, (MousePosition.X - Location.X - 60) / 5 + o + posx] = couler;
+                                map[(MousePosition.Y - Location.Y - 80) / 5 + i + posy, (MousePosition.X - Location.X - 60) / 5 - o + posx] = couler;
+                                map[(MousePosition.Y - Location.Y - 80) / 5 + i + posy, (MousePosition.X - Location.X - 60) / 5 + posx] = couler;
+                                map[(MousePosition.Y - Location.Y - 80) / 5 + posy, (MousePosition.X - Location.X - 60) / 5 - o + posx] = couler;
+                                map[(MousePosition.Y - Location.Y - 80) / 5 + posy, (MousePosition.X - Location.X - 60) / 5 + posx] = couler;
+                                map[(MousePosition.Y - Location.Y - 80) / 5 - i + posy, (MousePosition.X - Location.X - 60) / 5 - o + posx] = couler;
+                                map[(MousePosition.Y - Location.Y - 80) / 5 - i + posy, (MousePosition.X - Location.X - 60) / 5 + posx] = couler;
                             }
                         for (int i = 0; i < 150; i++)
                             for (int o = 0; o < 270; o++)
                                 cam.SetValue(map[i + posy, o + posx], i, o);
                         pic.Refresh();
-                    }
-                    break;
-            }
+
         }
 
         private void barre(object e, EventArgs evt)
@@ -156,6 +169,21 @@ namespace Project5
             grille.Panel2.Controls.Remove(tailplatfrm);
             grille.Panel2.Controls.Remove(bar);
             grille.Panel2.Controls.Add(plateformblanche);
+            grille.Panel2.Controls.Remove(effacer);
+        }
+
+        private void efface(object sender, EventArgs evt)
+        {
+            if (choix == choix.effacer)
+            {
+                choix = choix.platformblanche;
+                effacer.Text = "Effacer";
+            }else
+            if (choix == choix.platformblanche)
+            {
+                choix = choix.effacer;
+                effacer.Text = "Plateforme";
+            }
         }
     }
 }
