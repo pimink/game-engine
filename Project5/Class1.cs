@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Drawing;
 using System.ComponentModel;
+using Project5.objet;
 
 namespace Project5
 {
@@ -18,8 +19,8 @@ namespace Project5
     class Fenetre : Form
     {
         private Button fermer = new Button(), effacer = new Button();
-        private Color[,] cam = new Color[150, 270];
-        private Color[,] map = new Color[1000, 2000];
+        private objeet[,] cam = new objeet[150, 270];
+        private objeet[,] map = new objeet[1000, 2000];
         private int posx = 10;
         private int posy = 350;
         private SplitContainer grille = new SplitContainer();
@@ -62,7 +63,7 @@ namespace Project5
             pic.Dock = DockStyle.Fill;
             for (int i = 0; i < 1000; i++)
                 for (int o = 0; o < 2000; o++)
-                    map.SetValue(Color.Black, i, o);
+                    map.SetValue(new Plateformecs(Color.Black), i, o);
             for (int i = 0; i < 150; i++)
                 for (int o = 0; o < 270; o++)
                     cam.SetValue(map[i + posx, o + posy], i, o);
@@ -93,9 +94,9 @@ namespace Project5
                 for (int o = 0; o < 270; o++)
                 {
                     Rectangle pixel = new Rectangle(50 + 5 * o, 50 + 5 * i, 10, 10);
-                    SolidBrush n = new SolidBrush(cam[i, o]);
+                    SolidBrush n = new SolidBrush(cam[i, o].GetPixel(0,0));
                     e.Graphics.FillRectangle(n, pixel);
-                    Pen p = new Pen(cam[i, o]);
+                    Pen p = new Pen(cam[i, o].GetPixel(0, 0));
                     e.Graphics.DrawRectangle(p, pixel);
                     n.Dispose();
                 }
@@ -138,15 +139,15 @@ namespace Project5
                         for (int o = 0; o <= tailleplatform - 1; o++)
                             for (int i = 0; i <= tailleplatform - 1; i++)
                             {
-                                map[(MousePosition.Y - Location.Y - 80) / 5 + i + posy, (MousePosition.X - Location.X - 60) / 5 + o + posx] = couler;
-                                map[(MousePosition.Y - Location.Y - 80) / 5 - i + posy, (MousePosition.X - Location.X - 60) / 5 + o + posx] = couler;
-                                map[(MousePosition.Y - Location.Y - 80) / 5 + posy, (MousePosition.X - Location.X - 60) / 5 + o + posx] = couler;
-                                map[(MousePosition.Y - Location.Y - 80) / 5 + i + posy, (MousePosition.X - Location.X - 60) / 5 - o + posx] = couler;
-                                map[(MousePosition.Y - Location.Y - 80) / 5 + i + posy, (MousePosition.X - Location.X - 60) / 5 + posx] = couler;
-                                map[(MousePosition.Y - Location.Y - 80) / 5 + posy, (MousePosition.X - Location.X - 60) / 5 - o + posx] = couler;
-                                map[(MousePosition.Y - Location.Y - 80) / 5 + posy, (MousePosition.X - Location.X - 60) / 5 + posx] = couler;
-                                map[(MousePosition.Y - Location.Y - 80) / 5 - i + posy, (MousePosition.X - Location.X - 60) / 5 - o + posx] = couler;
-                                map[(MousePosition.Y - Location.Y - 80) / 5 - i + posy, (MousePosition.X - Location.X - 60) / 5 + posx] = couler;
+                                map[(MousePosition.Y - Location.Y - 80) / 5 + i + posy, (MousePosition.X - Location.X - 60) / 5 + o + posx] = new Plateformecs(couler);
+                                map[(MousePosition.Y - Location.Y - 80) / 5 - i + posy, (MousePosition.X - Location.X - 60) / 5 + o + posx] = new Plateformecs(couler);
+                                map[(MousePosition.Y - Location.Y - 80) / 5 + posy, (MousePosition.X - Location.X - 60) / 5 + o + posx] = new Plateformecs(couler);
+                                map[(MousePosition.Y - Location.Y - 80) / 5 + i + posy, (MousePosition.X - Location.X - 60) / 5 - o + posx] = new Plateformecs(couler);
+                                map[(MousePosition.Y - Location.Y - 80) / 5 + i + posy, (MousePosition.X - Location.X - 60) / 5 + posx] = new Plateformecs(couler);
+                                map[(MousePosition.Y - Location.Y - 80) / 5 + posy, (MousePosition.X - Location.X - 60) / 5 - o + posx] = new Plateformecs(couler);
+                                map[(MousePosition.Y - Location.Y - 80) / 5 + posy, (MousePosition.X - Location.X - 60) / 5 + posx] = new Plateformecs(couler);
+                                map[(MousePosition.Y - Location.Y - 80) / 5 - i + posy, (MousePosition.X - Location.X - 60) / 5 - o + posx] = new Plateformecs(couler);
+                                map[(MousePosition.Y - Location.Y - 80) / 5 - i + posy, (MousePosition.X - Location.X - 60) / 5 + posx] = new Plateformecs(couler);
                             }
                         for (int i = 0; i < 150; i++)
                             for (int o = 0; o < 270; o++)
