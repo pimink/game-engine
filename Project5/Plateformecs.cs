@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,9 +11,17 @@ namespace Project5
     {
         class Plateformecs : objeet
         {
+            private bool solid;
             public Plateformecs(Color couleur)
             {
                 SetPixel(couleur);
+                if (couleur != Color.Black)
+                    solid = true;
+            }
+
+            public bool IsSolid()
+            {
+                return solid;
             }
         }
     }
