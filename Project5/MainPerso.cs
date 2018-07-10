@@ -1,16 +1,22 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Drawing;
 
 namespace Project5
 {
-    class MainPerso
+    namespace objet
     {
-        private int[,] _size = new int[30, 15];
-        private Bitmap _frame = new Bitmap("main.png");
-
+        class MainPerso : objeet
+        {
+            private int xpos, ypos;
+            public MainPerso(int posy, int posx)
+            {
+                xpos = posx; ypos = posy;
+            }
+        }
     }
 }
