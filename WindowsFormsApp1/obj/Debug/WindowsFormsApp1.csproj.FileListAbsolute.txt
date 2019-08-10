@@ -7,3 +7,12 @@ C:\Users\jjbda\source\repos\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\WindowsF
 C:\Users\jjbda\source\repos\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
 C:\Users\jjbda\source\repos\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
 C:\Users\jjbda\source\repos\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
+C:\Users\jjbda\source\repos\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\Json.dll
+C:\Users\jjbda\source\repos\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\Newtonsoft.Json.dll
+C:\Users\jjbda\source\repos\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\Json.pdb
+C:\Users\jjbda\source\repos\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\jjbda\source\repos\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\Newtonsoft.Json.xml
+C:\Users\jjbda\source\repos\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CopyComplete
+C:\Users\jjbda\source\repos\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\BumpKit.dll
+C:\Users\jjbda\source\repos\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\Vse.Web.Serialization.dll
+C:\Users\jjbda\source\repos\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\Vse.Web.Serialization.pdb

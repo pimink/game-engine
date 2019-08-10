@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project5", "Project5\Project5.csproj", "{964A5BDA-FA61-40A7-B030-832062E03B74}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "game engine 2d", "Project5\game engine 2d.csproj", "{964A5BDA-FA61-40A7-B030-832062E03B74}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

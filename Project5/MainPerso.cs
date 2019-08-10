@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,9 +13,9 @@ namespace Project5
         class MainPerso : objeet
         {
             private int xpos, ypos;
-            public MainPerso(int posy, int posx)
+            public MainPerso(int posy, int posx) 
             {
-                xpos = posx; ypos = posy;
+                xpos = posx; ypos = posy; 
             }
         }
     }

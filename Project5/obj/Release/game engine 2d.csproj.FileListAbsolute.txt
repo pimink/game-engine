@@ -1,0 +1,8 @@
+C:\Users\jjbda\source\repos\Project5\Project5\bin\Release\Project5.exe.config
+C:\Users\jjbda\source\repos\Project5\Project5\bin\Release\Project5.exe
+C:\Users\jjbda\source\repos\Project5\Project5\bin\Release\Project5.pdb
+C:\Users\jjbda\source\repos\Project5\Project5\obj\Release\Project5.Fenetre.resources
+C:\Users\jjbda\source\repos\Project5\Project5\obj\Release\game engine 2d.csproj.GenerateResource.cache
+C:\Users\jjbda\source\repos\Project5\Project5\obj\Release\game engine 2d.csproj.CoreCompileInputs.cache
+C:\Users\jjbda\source\repos\Project5\Project5\obj\Release\Project5.exe
+C:\Users\jjbda\source\repos\Project5\Project5\obj\Release\Project5.pdb
