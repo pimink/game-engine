@@ -22,7 +22,7 @@ namespace Project5
 
     class Fenetre : Form
     {
-        private Button fermer = new Button(), effacer = new Button(), grilleAff = new Button(), ligne = new Button(), creerLigne = new Button(), rectangl = new Button(), creerRect = new Button(), select = new Button(), ajoutSprite = new Button(), sprite, haut, bas, gauche, droite, fermersprite, retourner, ajouter;
+        private Button fermer, effacer, grilleAff = new Button(), ligne = new Button(), creerLigne = new Button(), rectangl = new Button(), creerRect = new Button(), select = new Button(), ajoutSprite = new Button(), sprite, haut, bas, gauche, droite, fermersprite, retourner, ajouter;
         private Color[,] cam = new Color[100, 180];
         private Color[,] camBef = new Color[100, 180];
         private Color[,] map = new Color[1000, 2000], selection = new Color[100, 180], camDeBase = new Color[100, 180];
@@ -48,11 +48,15 @@ namespace Project5
 
         public Fenetre()
         {
+            //Revenir a l'"accueil" (pour la section plateforme)
+            fermer = new Button
+            {
+                Location = new Point(190, 20),
+                Text = "fermer",
+                ForeColor = Color.Red
+            };
 
-            fermer.Location = new Point(190, 20);
-            fermer.Text = "fermer";
-            fermer.ForeColor = Color.Red;
-
+            //Accès a la section "sprite"
             sprite = new Button
             {
                 Text = "Outils sprite",
@@ -61,6 +65,7 @@ namespace Project5
                 Size = new Size(200, 200)
             };
 
+            //Ajout d'un sprite au niveau
             ajouter = new Button()
             {
                 Location = new Point(50, 300),
@@ -69,34 +74,35 @@ namespace Project5
                 ForeColor = Color.White
             };
 
+            //------------------------------------------------------
+            //Boutons de naviguation a travers la map
             haut = new Button
             {
                 BackgroundImage = new Bitmap("Ressources/haut.png"),
                 Location = new Point(90, 520),
                 Size = new Size(30, 30)
             };
-
             bas = new Button
             {
                 BackgroundImage = new Bitmap("Ressources/bas.png"),
                 Location = new Point(90, 590),
                 Size = new Size(30, 30)
             };
-
             gauche = new Button
             {
                 BackgroundImage = new Bitmap("Ressources/gauche.png"),
                 Location = new Point(55, 555),
                 Size = new Size(30, 30)
             };
-
             droite = new Button
             {
                 BackgroundImage = new Bitmap("Ressources/droite.png"),
                 Location = new Point(125, 555),
                 Size = new Size(30, 30)
             };
+            //------------------------------------------------------
 
+            //Changer l'orientation d'un sprite
             retourner = new Button()
             {
                 BackgroundImage = new Bitmap("Ressources/inverser.png"),
@@ -104,60 +110,81 @@ namespace Project5
                 Size = new Size(30, 30)
             };
 
+            //Revenir a l'"accueil" (pour la section Sprite)
             fermersprite = fermer;
 
-            effacer.Location = new Point(200, 135);
-            effacer.Text = "Effacer";
-            effacer.ForeColor = Color.White;
-
+            //Outil "gomme"
+            effacer = new Button
+            {
+                Location = new Point(200, 135),
+                Text = "Effacer",
+                ForeColor = Color.White
+            };
+            
+            //Trackbar définissant la taille du curseur
             bar.Location = new Point(50, 100);
-
+            
+            //Bah la couleur d'arrière plan
             BackColor = Color.FromArgb(53, 53, 53);
+
+            //container pricipal (bon a partir de là flemme d'optimiser)
             grille.Dock = DockStyle.Fill;
             grille.Panel1MinSize = 1410;
             grille.IsSplitterFixed = true;
 
+            //Affichage de la grille sur le niveau (rien a voir avec le control précédent)
             grilleAff.Location = new Point(50, 20);
             grilleAff.Text = "Grille";
             grilleAff.ForeColor = Color.White;
 
+            //Accès a la section "Plateforme"
             plateformblanche.Size = new Size(200, 200);
             plateformblanche.Location = new Point(50, 50);
             plateformblanche.Text = "PLATEFORME BLANCHE";
             plateformblanche.ForeColor = Color.White;
 
+            //ouverture d'un sprite
             ajoutSprite.Location = new Point(50, 300);
             ajoutSprite.Size = new Size(200, 20);
             ajoutSprite.Text = "Ajouter une entité/personnage/objet";
             ajoutSprite.ForeColor = Color.White;
 
+            //Afficheur de la taille du curseur
             tailplatfrm.Location = new Point(160, 105);
             tailplatfrm.Text = "1 pixels";
             tailplatfrm.ForeColor = Color.White;
 
+            //Ouverture de l'outil pour faire des lignes
             ligne.BackgroundImage = new Bitmap("Ressources/Capture.png");
             ligne.Location = new Point(50, 180);
             ligne.Size = new Size(30, 30);
 
+            //ouverture de l'outil pour faire des rectangle
             rectangl.BackgroundImage = new Bitmap("Ressources/rectangle.png");
             rectangl.Location = new Point(50, 240);
             rectangl.Size = new Size(30, 30);
 
+            //Ouverture de l'outil selection puis déplacement
             select.Text = "Deplacer";
             select.Location = new Point(50, 290);
             select.ForeColor = Color.White;
 
+            //Création de la ligne sur le niveau
             creerLigne.Text = "Creer";
             creerLigne.Location = new Point(190, 180);
             creerLigne.ForeColor = Color.White;
 
+            //Création de la ligne sur le niveau
             creerRect.Text = "Creer";
             creerRect.Location = new Point(190, 240);
             creerRect.ForeColor = Color.White;
 
+            //Niveau (caméra)
             pic.BackColor = Color.FromArgb(53, 53, 53);
             pic.Paint += new PaintEventHandler(chargerImage);
             pic.Dock = DockStyle.Fill;
+
+            //Création de la map puis de la caméra
             for (int i = 0; i < 1000; i++)
                 for (int o = 0; o < 2000; o++)
                     map.SetValue(Color.Black, i, o);
@@ -171,12 +198,17 @@ namespace Project5
             Graphics g = Graphics.FromImage(camb);
             g.FillRectangle(new SolidBrush(Color.Black), rectf);
             g.Flush();
+
+
             SuspendLayout();
+
+            //Paramétrage de la fenètre
             Text = "Team Cumin's Game Engine";
             Size = new Size(1800, 1000);
             MinimumSize = new Size(1600, 1000);
             Icon = new Icon("Logo.ico");
 
+            //Mise en relation des evenements avec leurs handlers
             MouseUp += Pic_MouseUp;
             bar.ValueChanged += barre;
             plateformblanche.MouseClick += PlateformeBlanche;
@@ -200,6 +232,7 @@ namespace Project5
             retourner.Click += (x, y) => { if (retourné) retourné = false; else retourné = true; pic.Refresh(); };
             ajouter.Click += Ajouter_Click;
 
+            //ajout des controles sur la fenetres
             grille.Panel1.Controls.Add(pic);
             grille.Panel2.Controls.Add(plateformblanche);
             grille.Panel2.Controls.Add(haut);
@@ -208,15 +241,18 @@ namespace Project5
             grille.Panel2.Controls.Add(gauche);
             grille.Panel2.Controls.Add(sprite);
             Controls.Add(grille);
+
             ResumeLayout(false);
             PerformLayout();
+
+            //Lancement des différents threads
             Thread t = new Thread(new ThreadStart(drawer));
             t.Start();
             Thread th = new Thread(new ThreadStart(outilsThread));
             th.Start();
 
         }
-
+        
         private void Ajouter_Click(object sender, EventArgs e)
         {
             if (actualSpriteJSon.type == "Personnage")
@@ -230,10 +266,27 @@ namespace Project5
                         for (int o = 0; o < 10; o++)
                         {
                             RectangleF rectf = new RectangleF(o * 7, i * 7, 7, 7);
-                            if (actualSpriteJSon.breathAnim[k][o + i * 10].ToString() == "Color [A=255, R=0, G=0, B=0]")
+                            if (actualSpriteJSon.breathAnim[k][o + i * 10] == 0)
                                 g.FillRectangle(new SolidBrush(Color.Empty), rectf);
                             else
-                                g.FillRectangle(new SolidBrush(actualSpriteJSon.breathAnim[0][o + i * 10]), rectf);
+                                switch (actualSpriteJSon.breathAnim[0][o + i * 10])
+                                {
+                                    case 5:
+                                        g.FillRectangle(new SolidBrush(Color.White), rectf);
+                                        break;
+                                    case 4:
+                                        g.FillRectangle(new SolidBrush(Color.LightGray), rectf);
+                                        break;
+                                    case 3:
+                                        g.FillRectangle(new SolidBrush(Color.Gray), rectf);
+                                        break;
+                                    case 2:
+                                        g.FillRectangle(new SolidBrush(Color.FromArgb(73,73,73)), rectf);
+                                        break;
+                                    case 1:
+                                        g.FillRectangle(new SolidBrush(Color.FromArgb(53, 53, 53)), rectf);
+                                        break;
+                                }
                         }
                     personnage.BreathAnim.Add(tempFrame);
                 }
@@ -243,10 +296,27 @@ namespace Project5
                         for (int o = 0; o < 10; o++)
                         {
                             RectangleF rectf = new RectangleF(o * 7, i * 7, 7, 7);
-                            if (actualSpriteJSon.deathAnim[k][o + i * 10].ToString() == "Color [A=255, R=0, G=0, B=0]")
+                            if (actualSpriteJSon.deathAnim[k][o + i * 10] == 0)
                                 g.FillRectangle(new SolidBrush(Color.Empty), rectf);
                             else
-                                g.FillRectangle(new SolidBrush(actualSpriteJSon.deathAnim[0][o + i * 10]), rectf);
+                                switch (actualSpriteJSon.deathAnim[0][o + i * 10])
+                                {
+                                    case 5:
+                                        g.FillRectangle(new SolidBrush(Color.White), rectf);
+                                        break;
+                                    case 4:
+                                        g.FillRectangle(new SolidBrush(Color.LightGray), rectf);
+                                        break;
+                                    case 3:
+                                        g.FillRectangle(new SolidBrush(Color.Gray), rectf);
+                                        break;
+                                    case 2:
+                                        g.FillRectangle(new SolidBrush(Color.FromArgb(73, 73, 73)), rectf);
+                                        break;
+                                    case 1:
+                                        g.FillRectangle(new SolidBrush(Color.FromArgb(53, 53, 53)), rectf);
+                                        break;
+                                }
                         }
                     personnage.DeathAnim.Add(tempFrame);
                 }
@@ -256,10 +326,27 @@ namespace Project5
                         for (int o = 0; o < 10; o++)
                         {
                             RectangleF rectf = new RectangleF(o * 7, i * 7, 7, 7);
-                            if (actualSpriteJSon.walkAnim[k][o + i * 10].ToString() == "Color [A=255, R=0, G=0, B=0]")
+                            if (actualSpriteJSon.walkAnim[k][o + i * 10] == 0)
                                 g.FillRectangle(new SolidBrush(Color.Empty), rectf);
                             else
-                                g.FillRectangle(new SolidBrush(actualSpriteJSon.walkAnim[0][o + i * 10]), rectf);
+                                switch (actualSpriteJSon.walkAnim[0][o + i * 10])
+                                {
+                                    case 5:
+                                        g.FillRectangle(new SolidBrush(Color.White), rectf);
+                                        break;
+                                    case 4:
+                                        g.FillRectangle(new SolidBrush(Color.LightGray), rectf);
+                                        break;
+                                    case 3:
+                                        g.FillRectangle(new SolidBrush(Color.Gray), rectf);
+                                        break;
+                                    case 2:
+                                        g.FillRectangle(new SolidBrush(Color.FromArgb(73, 73, 73)), rectf);
+                                        break;
+                                    case 1:
+                                        g.FillRectangle(new SolidBrush(Color.FromArgb(53, 53, 53)), rectf);
+                                        break;
+                                }
                         }
                     personnage.WalkAnim.Add(tempFrame);
                 }
@@ -269,10 +356,27 @@ namespace Project5
                         for (int o = 0; o < 10; o++)
                         {
                             RectangleF rectf = new RectangleF(o * 7, i * 7, 7, 7);
-                            if (actualSpriteJSon.jumpAnim[k][o + i * 10].ToString() == "Color [A=255, R=0, G=0, B=0]")
+                            if (actualSpriteJSon.jumpAnim[k][o + i * 10] == 0)
                                 g.FillRectangle(new SolidBrush(Color.Empty), rectf);
                             else
-                                g.FillRectangle(new SolidBrush(actualSpriteJSon.jumpAnim[0][o + i * 10]), rectf);
+                                switch (actualSpriteJSon.jumpAnim[0][o + i * 10])
+                                {
+                                    case 5:
+                                        g.FillRectangle(new SolidBrush(Color.White), rectf);
+                                        break;
+                                    case 4:
+                                        g.FillRectangle(new SolidBrush(Color.LightGray), rectf);
+                                        break;
+                                    case 3:
+                                        g.FillRectangle(new SolidBrush(Color.Gray), rectf);
+                                        break;
+                                    case 2:
+                                        g.FillRectangle(new SolidBrush(Color.FromArgb(73, 73, 73)), rectf);
+                                        break;
+                                    case 1:
+                                        g.FillRectangle(new SolidBrush(Color.FromArgb(53, 53, 53)), rectf);
+                                        break;
+                                }
                         }
                     personnage.JumpAnim.Add(tempFrame);
                 }
@@ -282,10 +386,27 @@ namespace Project5
                         for (int o = 0; o < 10; o++)
                         {
                             RectangleF rectf = new RectangleF(o * 7, i * 7, 7, 7);
-                            if (actualSpriteJSon.sneakAnim[k][o + i * 10].ToString() == "Color [A=255, R=0, G=0, B=0]")
+                            if (actualSpriteJSon.sneakAnim[k][o + i * 10] == 0)
                                 g.FillRectangle(new SolidBrush(Color.Empty), rectf);
                             else
-                                g.FillRectangle(new SolidBrush(actualSpriteJSon.sneakAnim[0][o + i * 10]), rectf);
+                                switch (actualSpriteJSon.sneakAnim[0][o + i * 10])
+                                {
+                                    case 5:
+                                        g.FillRectangle(new SolidBrush(Color.White), rectf);
+                                        break;
+                                    case 4:
+                                        g.FillRectangle(new SolidBrush(Color.LightGray), rectf);
+                                        break;
+                                    case 3:
+                                        g.FillRectangle(new SolidBrush(Color.Gray), rectf);
+                                        break;
+                                    case 2:
+                                        g.FillRectangle(new SolidBrush(Color.FromArgb(73, 73, 73)), rectf);
+                                        break;
+                                    case 1:
+                                        g.FillRectangle(new SolidBrush(Color.FromArgb(53, 53, 53)), rectf);
+                                        break;
+                                }
                         }
                     personnage.SneakAnim.Add(tempFrame);
                 }
@@ -295,10 +416,27 @@ namespace Project5
                         for (int o = 0; o < 10; o++)
                         {
                             RectangleF rectf = new RectangleF(o * 7, i * 7, 7, 7);
-                            if (actualSpriteJSon.runAnim[k][o + i * 10].ToString() == "Color [A=255, R=0, G=0, B=0]")
+                            if (actualSpriteJSon.runAnim[k][o + i * 10] == 0)
                                 g.FillRectangle(new SolidBrush(Color.Empty), rectf);
                             else
-                                g.FillRectangle(new SolidBrush(actualSpriteJSon.runAnim[0][o + i * 10]), rectf);
+                                switch (actualSpriteJSon.runAnim[0][o + i * 10])
+                                {
+                                    case 5:
+                                        g.FillRectangle(new SolidBrush(Color.White), rectf);
+                                        break;
+                                    case 4:
+                                        g.FillRectangle(new SolidBrush(Color.LightGray), rectf);
+                                        break;
+                                    case 3:
+                                        g.FillRectangle(new SolidBrush(Color.Gray), rectf);
+                                        break;
+                                    case 2:
+                                        g.FillRectangle(new SolidBrush(Color.FromArgb(73, 73, 73)), rectf);
+                                        break;
+                                    case 1:
+                                        g.FillRectangle(new SolidBrush(Color.FromArgb(53, 53, 53)), rectf);
+                                        break;
+                                }
                         }
                     personnage.RunAnim.Add(tempFrame);
                 }
@@ -546,10 +684,27 @@ namespace Project5
                 {
                     RectangleF rectf = new RectangleF(o * 7, i * 7, 7, 7);
                     Console.WriteLine(actualSpriteJSon.breathAnim[0][o + i * 10].ToString());
-                    if (actualSpriteJSon.breathAnim[0][o + i * 10].ToString() == "Color [A=255, R=0, G=0, B=0]")
+                    if (actualSpriteJSon.breathAnim[0][o + i * 10] == 0)
                         g.FillRectangle(new SolidBrush(Color.Empty), rectf);
                     else
-                        g.FillRectangle(new SolidBrush(actualSpriteJSon.breathAnim[0][o + i * 10]), rectf);
+                        switch (actualSpriteJSon.breathAnim[0][o + i * 10])
+                        {
+                            case 5:
+                                g.FillRectangle(new SolidBrush(Color.White), rectf);
+                                break;
+                            case 4:
+                                g.FillRectangle(new SolidBrush(Color.LightGray), rectf);
+                                break;
+                            case 3:
+                                g.FillRectangle(new SolidBrush(Color.Gray), rectf);
+                                break;
+                            case 2:
+                                g.FillRectangle(new SolidBrush(Color.FromArgb(73, 73, 73)), rectf);
+                                break;
+                            case 1:
+                                g.FillRectangle(new SolidBrush(Color.FromArgb(53, 53, 53)), rectf);
+                                break;
+                        }
                 }
             actSpritX = 40 + posx;
             actSpritY = 85 + posy;

@@ -18,7 +18,7 @@ namespace Project5
         private int[] bitmap;
         private string type;
 
-        public objetFixe(string name, int[,] obj)
+        public objetFixe(string name, int[] obj)
         {
             nom = name; gen = 1; bitmap = obj; type = "";
             objetFixejson j = new objetFixejson();
@@ -68,7 +68,7 @@ namespace Project5
             stream.Close();
             return s.gen;
         }
-        public static int[,] Getbitmap(string name)
+        public static int[] Getbitmap(string name)
         {
             FileStream stream = new FileStream(name + ".json", FileMode.Open);
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(objetFixejson));
@@ -107,7 +107,7 @@ namespace Project5
             ser.WriteObject(stream, s);
             stream.Close();
         }
-        public static void Setbitmap(string name, int[,] objet)
+        public static void Setbitmap(string name, int[] objet)
         {
             FileStream stream = new FileStream(name + ".json", FileMode.Open);
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(objetFixejson));

@@ -12,18 +12,18 @@ using System.Threading.Tasks;
 namespace Project5
 {
     public class Sprite
-    { 
+    {
         private string type;
         private int gen;
-        private List<Color[]> breathAnim;
-        private List<Color[]> walkAnim;
-        private List<Color[]> jumpAnim;
-        private List<Color[]> sneakAnim;
-        private List<Color[]> runAnim;
+        private List<int[]> breathAnim;
+        private List<int[]> walkAnim;
+        private List<int[]> jumpAnim;
+        private List<int[]> sneakAnim;
+        private List<int[]> runAnim;
 
         public Sprite(string name)
         {
-            type = ""; gen = 1; breathAnim = new List<Color[]>(); walkAnim = new List<Color[]>(); jumpAnim = new List<Color[]>(); sneakAnim = new List<Color[]>(); runAnim = new List<Color[]>();
+            type = ""; gen = 1; breathAnim = new List<int[]>(); walkAnim = new List<int[]>(); jumpAnim = new List<int[]>(); sneakAnim = new List<int[]>(); runAnim = new List<int[]>();
             Spritejson j = new Spritejson();
             j.name = name;
             j.type = type;
@@ -33,7 +33,32 @@ namespace Project5
             j.jumpAnim = jumpAnim;
             j.sneakAnim = sneakAnim;
             j.runAnim = runAnim;
-            j.deathAnim = new List<Color[]>();
+            j.deathAnim = new List<int[]>();
+            FileStream stream = new FileStream(name + ".json", FileMode.OpenOrCreate);
+            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Spritejson));
+            ser.WriteObject(stream, j);
+            stream.Position = 0;
+            StreamReader sr = new StreamReader(stream);
+            stream.Close();
+            sr.Close();
+        }
+
+        public Sprite(string name, int[] frame)
+        {
+            type = ""; gen = 1; breathAnim = new List<int[]>(); walkAnim = new List<int[]>(); jumpAnim = new List<int[]>(); sneakAnim = new List<int[]>(); runAnim = new List<int[]>();
+
+            Spritejson j = new Spritejson();
+            j.name = name;
+            j.type = type;
+            j.gen = gen;
+            j.breathAnim = breathAnim;
+            j.breathAnim.Add(frame);
+            j.walkAnim = walkAnim;
+            j.jumpAnim = jumpAnim;
+            j.sneakAnim = sneakAnim;
+            j.dimensions = new int[] { 0, 0 };
+            j.runAnim = runAnim;
+            j.deathAnim = new List<int[]>();
             FileStream stream = new FileStream(name + ".json", FileMode.OpenOrCreate);
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Spritejson));
             ser.WriteObject(stream, j);
@@ -54,17 +79,19 @@ namespace Project5
         [DataMember]
         internal int gen;
         [DataMember]
-        internal List<Color[]> breathAnim;
+        internal int[] dimensions;
         [DataMember]
-        internal List<Color[]> walkAnim;
+        internal List<int[]> breathAnim;
         [DataMember]
-        internal List<Color[]> jumpAnim;
+        internal List<int[]> walkAnim;
         [DataMember]
-        internal List<Color[]> deathAnim;
+        internal List<int[]> jumpAnim;
         [DataMember]
-        internal List<Color[]> sneakAnim;
+        internal List<int[]> deathAnim;
         [DataMember]
-        internal List<Color[]> runAnim;
+        internal List<int[]> sneakAnim;
+        [DataMember]
+        internal List<int[]> runAnim;
     }
     public static class SpriteGetter
     {
@@ -92,7 +119,7 @@ namespace Project5
             stream.Close();
             return s.gen;
         }
-        public static List<Color[]> GetbreathAnim(string name)
+        public static List<int[]> GetbreathAnim(string name)
         {
             FileStream stream = new FileStream(name + ".json", FileMode.Open);
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Spritejson));
@@ -100,7 +127,7 @@ namespace Project5
             stream.Close();
             return s.breathAnim;
         }
-        public static List<Color[]> GetwalkAnim(string name)
+        public static List<int[]> GetwalkAnim(string name)
         {
             FileStream stream = new FileStream(name + ".json", FileMode.Open);
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Spritejson));
@@ -108,7 +135,7 @@ namespace Project5
             stream.Close();
             return s.walkAnim;
         }
-        public static List<Color[]> GetjumpAnim(string name)
+        public static List<int[]> GetjumpAnim(string name)
         {
             FileStream stream = new FileStream(name + ".json", FileMode.Open);
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Spritejson));
@@ -116,7 +143,7 @@ namespace Project5
             stream.Close();
             return s.jumpAnim;
         }
-        public static List<Color[]> GetsneakAnim(string name)
+        public static List<int[]> GetsneakAnim(string name)
         {
             FileStream stream = new FileStream(name + ".json", FileMode.Open);
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Spritejson));
@@ -124,7 +151,7 @@ namespace Project5
             stream.Close();
             return s.sneakAnim;
         }
-        public static List<Color[]> GetdeathAnim(string name)
+        public static List<int[]> GetdeathAnim(string name)
         {
             FileStream stream = new FileStream(name + ".json", FileMode.Open);
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Spritejson));
@@ -132,7 +159,7 @@ namespace Project5
             stream.Close();
             return s.deathAnim;
         }
-        public static List<Color[]> GetrunAnim(string name)
+        public static List<int[]> GetrunAnim(string name)
         {
             FileStream stream = new FileStream(name + ".json", FileMode.Open);
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Spritejson));
@@ -149,6 +176,16 @@ namespace Project5
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Spritejson));
             Spritejson s = (Spritejson)ser.ReadObject(stream);
             s.name = objet;
+            stream.Position = 0;
+            ser.WriteObject(stream, s);
+            stream.Close();
+        }
+        public static void SetDims(string name, int[] objet)
+        {
+            FileStream stream = new FileStream(name + ".json", FileMode.Open);
+            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Spritejson));
+            Spritejson s = (Spritejson)ser.ReadObject(stream);
+            s.dimensions = objet;
             stream.Position = 0;
             ser.WriteObject(stream, s);
             stream.Close();
@@ -173,7 +210,7 @@ namespace Project5
             ser.WriteObject(stream, s);
             stream.Close();
         }
-        public static void SetbreathAnim(string name, List<Color[]> objet)
+        public static void SetbreathAnim(string name, List<int[]> objet)
         {
             FileStream stream = new FileStream(name + ".json", FileMode.Open);
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Spritejson));
@@ -182,9 +219,9 @@ namespace Project5
             stream.Position = 0;
             ser.WriteObject(stream, s);
             stream.Close();
-            
+
         }
-        public static void SetdeathAnim(string name, List<Color[]> objet)
+        public static void SetdeathAnim(string name, List<int[]> objet)
         {
             FileStream stream = new FileStream(name + ".json", FileMode.Open);
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Spritejson));
@@ -194,7 +231,7 @@ namespace Project5
             ser.WriteObject(stream, s);
             stream.Close();
         }
-        public static void SetwalkAnim(string name, List<Color[]> objet)
+        public static void SetwalkAnim(string name, List<int[]> objet)
         {
             FileStream stream = new FileStream(name + ".json", FileMode.Open);
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Spritejson));
@@ -204,7 +241,7 @@ namespace Project5
             ser.WriteObject(stream, s);
             stream.Close();
         }
-        public static void SetjumpAnim(string name, List<Color[]> objet)
+        public static void SetjumpAnim(string name, List<int[]> objet)
         {
             FileStream stream = new FileStream(name + ".json", FileMode.Open);
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Spritejson));
@@ -214,7 +251,7 @@ namespace Project5
             ser.WriteObject(stream, s);
             stream.Close();
         }
-        public static void SetsneakAnim(string name, List<Color[]> objet)
+        public static void SetsneakAnim(string name, List<int[]> objet)
         {
             FileStream stream = new FileStream(name + ".json", FileMode.Open);
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Spritejson));
@@ -224,7 +261,7 @@ namespace Project5
             ser.WriteObject(stream, s);
             stream.Close();
         }
-        public static void SetrunAnim(string name, List<Color[]> objet)
+        public static void SetrunAnim(string name, List<int[]> objet)
         {
             FileStream stream = new FileStream(name + ".json", FileMode.Open);
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Spritejson));

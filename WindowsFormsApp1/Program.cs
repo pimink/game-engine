@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 using System.ComponentModel;
+using System.Runtime.InteropServices;
 using System.IO;
 using BumpKit;
 using System.Windows.Input;
@@ -404,9 +405,10 @@ namespace Project5
                     int[] frameInt = new int[frame.Length];
                     for (int i = 0; i < frame.Length; i++)
                     {
+                        string f = frame[i].ToString();
                         switch (frame[i].ToString())
                         {
-                            case "{\"knownColor\":164,\"name\":null,\"state\":1,\"value\":0}":
+                            case "{Name=ffffffff, ARGB=(255, 255, 255, 255)}":
                                 frameInt[i] = 5;
                                 break;
                             case "{\"knownColor\":95,\"name\":null,\"state\":1,\"value\":0}":
@@ -959,6 +961,14 @@ namespace Project5
 
         }
 
+        //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        //Main (a chaque fois je la cherche pendant des heures)
+
+        [DllImport("kernel32.dll")]
+        static extern IntPtr GetConsoleWindow();
+
+        [DllImport("user32.dll")]
+        static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
         static void Main()
         {
             //Lance l'application
@@ -978,6 +988,7 @@ namespace Project5
             tcs.Task.GetAwaiter().GetResult();*/
             fen.thread = false;
         }
+        //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
         //Déclenché lorsqu'on appuie sur le bouton "PLATEFORME BLANCHE" et ajoute tout les outils a la fenetre
         private void PlateformeBlanche(object sender, EventArgs evt)
