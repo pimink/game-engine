@@ -24,6 +24,7 @@ namespace Project5
 
     class Fenetre : Form
     {
+        
         private Button fermer = new Button(), effacer = new Button(), grilleAff = new Button(), _frameSuivante = new Button(), _framePrecedente = new Button(), _compiller = new Button(), _playAnim = new Button(), _stopAnim = new Button(), plateformblanche = new Button(), _selection = new Button();
         private Color[,] cam, selection, camDeBase;
         private SplitContainer grille = new SplitContainer();
@@ -221,30 +222,27 @@ namespace Project5
                 for (int i = 0; i < _tailleX; i++)
                     for (int o = 0; o < _tailleY; o++)
                     {
-                        frame[o * _tailleX+ i]  = cam[o, i];
+                        frame[o * _tailleX + i + (int)(Math.Truncate((decimal)(i / 10) * (_tailleX - 1) * 10))] = _respiration[0].GetPixel(o, i);
                     }
                 int[] frameInt = new int[frame.Length];
-                for(int i = 0; i < frame.Length; i++)
+                for (int i = 0; i < frame.Length; i++)
                 {
-                    switch (frame[i].ToString())
+                    switch (frame[i].Name)
                     {
-                        case "Color[A = 255, R = 255, G = 255, B = 255]":
+                        case "ffffffff":
                             frameInt[i] = 5;
                             break;
-                        case "Color[A = 255, R = 211, G = 211, B = 211]":
+                        case "ffd3d3d3":
                             frameInt[i] = 4;
                             break;
-                        case "Color[A = 255, R = 128, G = 128, B = 128]":
+                        case "ff808080":
                             frameInt[i] = 3;
                             break;
-                        case "Color[A = 255, R = 73, G = 73, B = 73]":
+                        case "ff494949":
                             frameInt[i] = 2;
                             break;
-                        case "Color[A = 255, R = 53, G = 53, B = 53]":
+                        case "ff353535":
                             frameInt[i] = 1;
-                            break;
-                        case "Color[A = 255, R = 0, G = 0, B = 0]":
-                            frameInt[i] = 0;
                             break;
                     }
                 }
@@ -289,30 +287,27 @@ namespace Project5
                     for (int i = 0; i < _tailleY; i++)
                         for (int o = 0; o < _tailleX; o++)
                         {
-                            frame[o * _tailleX+ i] = _death[f].GetPixel(o, i);
+                            frame[o * _tailleX + i + (int)(Math.Truncate((decimal)(i / 10) * (_tailleX - 1) * 10))] = _death[f].GetPixel(o, i);
                         }
                     int[] frameInt = new int[frame.Length];
                     for (int i = 0; i < frame.Length; i++)
                     {
-                        switch (frame[i].ToString())
+                        switch (frame[i].Name)
                         {
-                            case "{\"knownColor\":164,\"name\":null,\"state\":1,\"value\":0}":
+                            case "ffffffff":
                                 frameInt[i] = 5;
                                 break;
-                            case "{\"knownColor\":95,\"name\":null,\"state\":1,\"value\":0}":
+                            case "ffd3d3d3":
                                 frameInt[i] = 4;
                                 break;
-                            case "{\"knownColor\":78,\"name\":null,\"state\":1,\"value\":0}":
+                            case "ff808080":
                                 frameInt[i] = 3;
                                 break;
-                            case "{\"knownColor\":0,\"name\":null,\"state\":2,\"value\":4282992969}":
+                            case "ff494949":
                                 frameInt[i] = 2;
                                 break;
-                            case "{\"knownColor\":0,\"name\":null,\"state\":1,\"value\":4281677109}":
+                            case "ff353535":
                                 frameInt[i] = 1;
-                                break;
-                            case "{\"knownColor\":35,\"name\":null,\"state\":1,\"value\":0}":
-                                frameInt[i] = 0;
                                 break;
                         }
                     }
@@ -326,30 +321,27 @@ namespace Project5
                     for (int i = 0; i < _tailleY; i++)
                         for (int o = 0; o < _tailleX; o++)
                         {
-                            frame[o * _tailleX + i] = _respiration[f].GetPixel(o, i);
+                            frame[o * _tailleX + i + (int)(Math.Truncate((decimal)(i / 10) * (_tailleX - 1) * 10))] = _respiration[f].GetPixel(o, i);
                         }
                     int[] frameInt = new int[frame.Length];
                     for (int i = 0; i < frame.Length; i++)
                     {
-                        switch (frame[i].ToString())
+                        switch (frame[i].Name)
                         {
-                            case "{\"knownColor\":164,\"name\":null,\"state\":1,\"value\":0}":
+                            case "ffffffff":
                                 frameInt[i] = 5;
                                 break;
-                            case "{\"knownColor\":95,\"name\":null,\"state\":1,\"value\":0}":
+                            case "ffd3d3d3":
                                 frameInt[i] = 4;
                                 break;
-                            case "{\"knownColor\":78,\"name\":null,\"state\":1,\"value\":0}":
+                            case "ff808080":
                                 frameInt[i] = 3;
                                 break;
-                            case "{\"knownColor\":0,\"name\":null,\"state\":2,\"value\":4282992969}":
+                            case "ff494949":
                                 frameInt[i] = 2;
                                 break;
-                            case "{\"knownColor\":0,\"name\":null,\"state\":1,\"value\":4281677109}":
+                            case "ff353535":
                                 frameInt[i] = 1;
-                                break;
-                            case "{\"knownColor\":35,\"name\":null,\"state\":1,\"value\":0}":
-                                frameInt[i] = 0;
                                 break;
                         }
                     }
@@ -363,30 +355,27 @@ namespace Project5
                     for (int i = 0; i < _tailleY; i++)
                         for (int o = 0; o < _tailleX; o++)
                         {
-                            frame[o * _tailleX + i] = _marche[f].GetPixel(o, i);
+                            frame[o * _tailleX + i + (int)(Math.Truncate((decimal)(i / 10) * (_tailleX - 1) * 10))] = _marche[f].GetPixel(o, i);
                         }
                     int[] frameInt = new int[frame.Length];
                     for (int i = 0; i < frame.Length; i++)
                     {
-                        switch (frame[i].ToString())
+                        switch (frame[i].Name)
                         {
-                            case "{\"knownColor\":164,\"name\":null,\"state\":1,\"value\":0}":
+                            case "ffffffff":
                                 frameInt[i] = 5;
                                 break;
-                            case "{\"knownColor\":95,\"name\":null,\"state\":1,\"value\":0}":
+                            case "ffd3d3d3":
                                 frameInt[i] = 4;
                                 break;
-                            case "{\"knownColor\":78,\"name\":null,\"state\":1,\"value\":0}":
+                            case "ff808080":
                                 frameInt[i] = 3;
                                 break;
-                            case "{\"knownColor\":0,\"name\":null,\"state\":2,\"value\":4282992969}":
+                            case "ff494949":
                                 frameInt[i] = 2;
                                 break;
-                            case "{\"knownColor\":0,\"name\":null,\"state\":1,\"value\":4281677109}":
+                            case "ff353535":
                                 frameInt[i] = 1;
-                                break;
-                            case "{\"knownColor\":35,\"name\":null,\"state\":1,\"value\":0}":
-                                frameInt[i] = 0;
                                 break;
                         }
                     }
@@ -400,31 +389,27 @@ namespace Project5
                     for (int i = 0; i < _tailleY; i++)
                         for (int o = 0; o < _tailleX; o++)
                         {
-                            frame[o * _tailleX + i] = _saut[f].GetPixel(o, i);
+                            frame[o * _tailleX + i + (int)(Math.Truncate((decimal)(i / 10) * (_tailleX - 1) * 10))] = _saut[f].GetPixel(o, i);
                         }
                     int[] frameInt = new int[frame.Length];
                     for (int i = 0; i < frame.Length; i++)
                     {
-                        string f = frame[i].ToString();
-                        switch (frame[i].ToString())
+                        switch (frame[i].Name)
                         {
-                            case "{Name=ffffffff, ARGB=(255, 255, 255, 255)}":
+                            case "ffffffff":
                                 frameInt[i] = 5;
                                 break;
-                            case "{\"knownColor\":95,\"name\":null,\"state\":1,\"value\":0}":
+                            case "ffd3d3d3":
                                 frameInt[i] = 4;
                                 break;
-                            case "{\"knownColor\":78,\"name\":null,\"state\":1,\"value\":0}":
+                            case "ff808080":
                                 frameInt[i] = 3;
                                 break;
-                            case "{\"knownColor\":0,\"name\":null,\"state\":2,\"value\":4282992969}":
+                            case "ff494949":
                                 frameInt[i] = 2;
                                 break;
-                            case "{\"knownColor\":0,\"name\":null,\"state\":1,\"value\":4281677109}":
+                            case "ff353535":
                                 frameInt[i] = 1;
-                                break;
-                            case "{\"knownColor\":35,\"name\":null,\"state\":1,\"value\":0}":
-                                frameInt[i] = 0;
                                 break;
                         }
                     }
@@ -438,30 +423,27 @@ namespace Project5
                     for (int i = 0; i < _tailleY; i++)
                         for (int o = 0; o < _tailleX; o++)
                         {
-                            frame[o * _tailleX + i] = _sneak[f].GetPixel(o, i);
+                            frame[o * _tailleX + i + (int)(Math.Truncate((decimal)(i / 10) * (_tailleX - 1) * 10))] = _sneak[f].GetPixel(o, i);
                         }
                     int[] frameInt = new int[frame.Length];
                     for (int i = 0; i < frame.Length; i++)
                     {
-                        switch (frame[i].ToString())
+                        switch (frame[i].Name)
                         {
-                            case "{\"knownColor\":164,\"name\":null,\"state\":1,\"value\":0}":
+                            case "ffffffff":
                                 frameInt[i] = 5;
                                 break;
-                            case "{\"knownColor\":95,\"name\":null,\"state\":1,\"value\":0}":
+                            case "ffd3d3d3":
                                 frameInt[i] = 4;
                                 break;
-                            case "{\"knownColor\":78,\"name\":null,\"state\":1,\"value\":0}":
+                            case "ff808080":
                                 frameInt[i] = 3;
                                 break;
-                            case "{\"knownColor\":0,\"name\":null,\"state\":2,\"value\":4282992969}":
+                            case "ff494949":
                                 frameInt[i] = 2;
                                 break;
-                            case "{\"knownColor\":0,\"name\":null,\"state\":1,\"value\":4281677109}":
+                            case "ff353535":
                                 frameInt[i] = 1;
-                                break;
-                            case "{\"knownColor\":35,\"name\":null,\"state\":1,\"value\":0}":
-                                frameInt[i] = 0;
                                 break;
                         }
                     }
@@ -475,30 +457,27 @@ namespace Project5
                     for (int i = 0; i < _tailleY; i++)
                         for (int o = 0; o < _tailleX; o++)
                         {
-                            frame[o * _tailleX + i] = _run[f].GetPixel(o, i);
+                            frame[o * _tailleX + i + (int)(Math.Truncate((decimal)(i / 10) * (_tailleX - 1) * 10))] = _run[f].GetPixel(o, i);
                         }
                     int[] frameInt = new int[frame.Length];
                     for (int i = 0; i < frame.Length; i++)
                     {
-                        switch (frame[i].ToString())
+                        switch (frame[i].Name)
                         {
-                            case "{\"knownColor\":164,\"name\":null,\"state\":1,\"value\":0}":
+                            case "ffffffff":
                                 frameInt[i] = 5;
                                 break;
-                            case "{\"knownColor\":95,\"name\":null,\"state\":1,\"value\":0}":
+                            case "ffd3d3d3":
                                 frameInt[i] = 4;
                                 break;
-                            case "{\"knownColor\":78,\"name\":null,\"state\":1,\"value\":0}":
+                            case "ff808080":
                                 frameInt[i] = 3;
                                 break;
-                            case "{\"knownColor\":0,\"name\":null,\"state\":2,\"value\":4282992969}":
+                            case "ff494949":
                                 frameInt[i] = 2;
                                 break;
-                            case "{\"knownColor\":0,\"name\":null,\"state\":1,\"value\":4281677109}":
+                            case "ff353535":
                                 frameInt[i] = 1;
-                                break;
-                            case "{\"knownColor\":35,\"name\":null,\"state\":1,\"value\":0}":
-                                frameInt[i] = 0;
                                 break;
                         }
                     }
@@ -524,30 +503,27 @@ namespace Project5
                     for (int i = 0; i < _tailleY; i++)
                         for (int o = 0; o < _tailleX; o++)
                         {
-                            frame[o * _tailleX + i] = _respiration[f].GetPixel(o, i);
+                            frame[o * _tailleX + i + (int)(Math.Truncate((decimal)(i / 10) * (_tailleX - 1) * 10))] = _respiration[f].GetPixel(o, i);
                         }
                     int[] frameInt = new int[frame.Length];
                     for (int i = 0; i < frame.Length; i++)
                     {
-                        switch (frame[i].ToString())
+                        switch (frame[i].Name)
                         {
-                            case "{\"knownColor\":164,\"name\":null,\"state\":1,\"value\":0}":
+                            case "ffffffff":
                                 frameInt[i] = 5;
                                 break;
-                            case "{\"knownColor\":95,\"name\":null,\"state\":1,\"value\":0}":
+                            case "ffd3d3d3":
                                 frameInt[i] = 4;
                                 break;
-                            case "{\"knownColor\":78,\"name\":null,\"state\":1,\"value\":0}":
+                            case "ff808080":
                                 frameInt[i] = 3;
                                 break;
-                            case "{\"knownColor\":0,\"name\":null,\"state\":2,\"value\":4282992969}":
+                            case "ff494949":
                                 frameInt[i] = 2;
                                 break;
-                            case "{\"knownColor\":0,\"name\":null,\"state\":1,\"value\":4281677109}":
+                            case "ff353535":
                                 frameInt[i] = 1;
-                                break;
-                            case "{\"knownColor\":35,\"name\":null,\"state\":1,\"value\":0}":
-                                frameInt[i] = 0;
                                 break;
                         }
                     }
@@ -557,6 +533,7 @@ namespace Project5
                 SpriteSetter.Settype(_nom.Text, "entitée");
                 SpriteSetter.SetDims(_nom.Text, new int[] { _tailleX, _tailleY });
             }
+            MessageBox.Show("Sprite compilé et enregistré!", "Compilation", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void _nom_TextChanged(object sender, EventArgs e)
@@ -641,8 +618,8 @@ namespace Project5
                     if(_respSetBool)
                     {
                         _bitmaps = _respiration;
-                        for (int a = 0; a < 20; a++)
-                            for (int o = 0; o < 10; o++)
+                        for (int a = 0; a < _tailleY; a++)
+                            for (int o = 0; o < _tailleX; o++)
                             {
                                 cam[a, o] = _bitmaps[_bitmaps.Count-1].GetPixel(o, a);
                             }
@@ -661,8 +638,8 @@ namespace Project5
                     if (_deathSetBool)
                     {
                         _bitmaps = _death;
-                        for (int a = 0; a < 20; a++)
-                            for (int o = 0; o < 10; o++)
+                        for (int a = 0; a < _tailleY; a++)
+                            for (int o = 0; o < _tailleX; o++)
                             {
                                 cam[a, o] = _bitmaps[_bitmaps.Count - 1].GetPixel(o, a);
                             }
@@ -681,8 +658,8 @@ namespace Project5
                     if (_marchSetBool)
                     {
                         _bitmaps = _marche;
-                        for (int a = 0; a < 20; a++)
-                            for (int o = 0; o < 10; o++)
+                        for (int a = 0; a < _tailleY; a++)
+                            for (int o = 0; o < _tailleX; o++)
                             {
                                 cam[a, o] = _bitmaps[_bitmaps.Count - 1].GetPixel(o, a);
                             }
@@ -701,8 +678,8 @@ namespace Project5
                     if (_sautSetBool)
                     {
                         _bitmaps = _saut;
-                        for (int a = 0; a < 20; a++)
-                            for (int o = 0; o < 10; o++)
+                        for (int a = 0; a < _tailleY; a++)
+                            for (int o = 0; o < _tailleX; o++)
                             {
                                 cam[a, o] = _bitmaps[_bitmaps.Count - 1].GetPixel(o, a);
                             }
@@ -721,8 +698,8 @@ namespace Project5
                     if (_sneakSetBool)
                     {
                         _bitmaps = _sneak;
-                        for (int a = 0; a < 20; a++)
-                            for (int o = 0; o < 10; o++)
+                        for (int a = 0; a < _tailleY; a++)
+                            for (int o = 0; o < _tailleX; o++)
                             {
                                 cam[a, o] = _bitmaps[_bitmaps.Count - 1].GetPixel(o, a);
                             }
@@ -741,8 +718,8 @@ namespace Project5
                     if (_runSetBool)
                     {
                         _bitmaps = _run;
-                        for (int a = 0; a < 20; a++)
-                            for (int o = 0; o < 10; o++)
+                        for (int a = 0; a < _tailleY; a++)
+                            for (int o = 0; o < _tailleX; o++)
                             {
                                 cam[a, o] = _bitmaps[_bitmaps.Count - 1].GetPixel(o, a);
                             }
@@ -1171,11 +1148,25 @@ namespace Project5
                 //changement de choix
                 if (choix != choix.selection)
                 {
+                    if (selectionné)
+                    {
+                        cam = camDeBase;
+                        for (int o = selDepX2 / 20; o < (selDepX2 / 20 + selx2 / 20); o++)
+                            for (int i = selDepY2 / 20; i < (selDepY2 + sely2) / 20; i++)
+                            {
+                                cam[i, o] = selection[i - selDepY2 / 20, o - selDepX2 / 20];
+                            }
+                        selectionné = false;
+                    }
+
+                    pic.Invoke(new MethodInvoker(delegate
+                    {
+                        pic.Refresh();
+                    }));
                     selDepX = 0;
                     selDepY = 0;
                     selx = 0;
                     sely = 0;
-                    selectionné = false;
                 }
             }
         }
